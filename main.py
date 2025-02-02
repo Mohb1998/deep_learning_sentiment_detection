@@ -13,7 +13,7 @@ def main():
 
     train_data = pd.read_csv("./data/train.csv", sep=",", names=["text", "label"])
     test_data = pd.read_csv("./data/test.csv", sep=",", names=["text", "label"])
-    eval_data = pd.read_csv("./data/eval.csv", sep=",", names=["text", "label"])
+    eval_data = pd.read_csv("./data/eval.csv", names=["phrase", "true_label"])
 
     label_mapping = {
         "joy": 0,
@@ -42,12 +42,12 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
-    print("Starting visualization process...")
-    # visualizations(train_data, label_mapping)
-
     print("Starting Model Evaluation...")
-    # evaluate_model(model, tokenizer, device)
+    evaluate_model(model, tokenizer, device, eval_data)
     print("Model Evaluation Completed.")
+
+    print("Starting visualization process...")
+    visualizations(train_data)
 
     print("Opening UI...")
     run_app(model, tokenizer, device)

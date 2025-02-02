@@ -51,12 +51,10 @@ def send_text(model, tokenizer, device, label_mapping):
     text_box.delete(1.0, tk.END)
 
 
-# Create the main application window
 app = tk.Tk()
 app.title("Emotion Detector")
 app.geometry("600x500")
 
-# UI Elements
 instructions = tk.Label(
     app, text="Press 'Start Listening' to input text via voice.", font=("Helvetica", 12)
 )
